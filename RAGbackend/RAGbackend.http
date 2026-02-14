@@ -1,0 +1,6 @@
+@RAGbackend_HostAddress = http://localhost:5148
+
+GET {{RAGbackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
