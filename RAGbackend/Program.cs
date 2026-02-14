@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.Http.Features;
+
 namespace RAGbackend
 {
     public class Program
@@ -20,6 +22,13 @@ namespace RAGbackend
                     policy=>policy.WithOrigins("http://localhost:4200")
                     .AllowAnyHeader()
                     .AllowAnyMethod()));
+
+            // Configure file upload size   
+            builder.Services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 100 * 1024 * 1024; // 100 MB
+            });
+
 
             var app = builder.Build();
 
