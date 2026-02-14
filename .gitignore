@@ -6,3 +6,6 @@
 /RAGbackend/obj
 *.user
 /RAGbackend/bin/Debug/net8.0
+RAGbackend/.vs/ProjectEvaluation/ragbackend.metadata.v9.bin
+RAGbackend/.vs/ProjectEvaluation/ragbackend.projects.v9.bin
+RAGbackend/.vs/ProjectEvaluation/ragbackend.strings.v9.bin
