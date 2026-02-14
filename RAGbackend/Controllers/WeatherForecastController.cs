@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RAGbackend.Models;
 
 namespace RAGbackend.Controllers
 {
