@@ -39,6 +39,9 @@ namespace RAGbackend
                 app.UseSwaggerUI();
             }
 
+            // Enable CORS
+            app.UseCors("AllowAngular");
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
