@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Http.Features;
+using RAGbackend.Services;
 
 namespace RAGbackend
 {
@@ -16,6 +17,12 @@ namespace RAGbackend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
            
+            //Register Services
+            builder.Services.AddScoped<IPdfProcessingService, PdfProcessingService>();
+            builder.Services.AddScoped<IVectorStoreService, QdrantVectorStoreService>();
+            builder.Services.AddScoped<ILlmService, OllamaService>();
+            builder.Services.AddScoped<IRagService, RagService>();
+
             //Configure CORS to allow requests from Angular frontend
             builder.Services.AddCors(options=>options
                 .AddPolicy("AllowAngular",
