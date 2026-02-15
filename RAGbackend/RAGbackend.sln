@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAGbackend", "RAGbackend.csproj", "{64C4B067-BAD5-44C1-8C02-F4CB70D7A0F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAGMovieApp", "..\RAGMovieApp\RAGMovieApp.csproj", "{6065F671-D740-4FF9-940A-4CA7AB133480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{64C4B067-BAD5-44C1-8C02-F4CB70D7A0F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64C4B067-BAD5-44C1-8C02-F4CB70D7A0F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64C4B067-BAD5-44C1-8C02-F4CB70D7A0F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6065F671-D740-4FF9-940A-4CA7AB133480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6065F671-D740-4FF9-940A-4CA7AB133480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6065F671-D740-4FF9-940A-4CA7AB133480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6065F671-D740-4FF9-940A-4CA7AB133480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
