@@ -1,0 +1,6 @@
+@RAGMovieApp_HostAddress = http://localhost:5177
+
+GET {{RAGMovieApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
