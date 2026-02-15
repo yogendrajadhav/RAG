@@ -14,7 +14,7 @@ public class OllamaService : ILlmService
     _httpClient = new HttpClient();
     _embeddingApiUrl = "localhost:11434"; // Placeholder URL
     _embeddingModel = "nomic-embed-text"; // Placeholder model name
-    _chatModel = "llama3"; // Placeholder model name
+    _chatModel = "qwen2.5:3b"; // Placeholder model name
   }
   public async Task<float[]> GenerateEmbeddingAsync(string text)
   {
