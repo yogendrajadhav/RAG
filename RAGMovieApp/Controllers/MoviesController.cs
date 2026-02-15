@@ -21,8 +21,7 @@ public class MoviesController : ControllerBase
   private static string qdrantCollectionName = "movies";
   private readonly IChatClient _chatClient = new OllamaChatClient(OllamaEndpoint, chatModelId);
 
-  private readonly IEmbeddingGenerator<string, Embedding<float>> _embeddingGenerator =
-    new OllamaEmbeddingGenerator(OllamaEndpoint, embeddingModelId);
+  private readonly IEmbeddingGenerator<string, Embedding<float>> _embeddingGenerator = new OllamaEmbeddingGenerator(OllamaEndpoint, embeddingModelId);
 
   private readonly QdrantClient _qdrantClient = new(qdrantEndpoint);
   private readonly QdrantVectorStore _vectorStore;
@@ -65,8 +64,14 @@ public class MoviesController : ControllerBase
     {
       VectorProperty = movie => movie.DescriptionEmbedding
     });
+
     var searchResult = new HashSet<string>();
-    await foreach (var result in results) searchResult.Add($"[{result.Record.Title}]: {result.Record.Description}");
+    
+    await foreach (var result in results)
+    {
+      searchResult.Add($"[{result.Record.Title}]: {result.Record.Description}");
+    }
+
     var context = string.Join(Environment.NewLine, searchResult);
 
     var prompt =
