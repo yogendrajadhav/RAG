@@ -1,4 +1,5 @@
 ﻿using RAGbackend.Models;
+using System.Text.Json;
 
 namespace RAGbackend.Services;
 
@@ -12,7 +13,8 @@ public class OllamaService : ILlmService
   public OllamaService() 
   {
     _httpClient = new HttpClient();
-    _embeddingApiUrl = "localhost:11434"; // Placeholder URL
+    _httpClient.Timeout = TimeSpan.FromMinutes(10);
+    _embeddingApiUrl = "http://localhost:11434"; // Placeholder URL
     _embeddingModel = "nomic-embed-text"; // Placeholder model name
     _chatModel = "qwen2.5:3b"; // Placeholder model name
   }
@@ -30,7 +32,13 @@ public class OllamaService : ILlmService
 
     response.EnsureSuccessStatusCode();
     var jsonResponse = await response.Content.ReadAsStringAsync();
-    var result = System.Text.Json.JsonSerializer.Deserialize<OllamaEmbeddingResponse>(jsonResponse);
+    
+    var options = new JsonSerializerOptions
+    {
+      PropertyNameCaseInsensitive = true
+    };
+
+    var result = JsonSerializer.Deserialize<OllamaEmbeddingResponse>(jsonResponse, options);
 
     // Use the deserialized embedding if available, otherwise return a default array
     return result?.Embedding?.Select(d => (float)d).ToArray() ?? Array.Empty<float>();// Example embedding size
@@ -55,7 +63,10 @@ public class OllamaService : ILlmService
     var response = await _httpClient.PostAsync($"{_embeddingApiUrl}/api/generate", content);
     response.EnsureSuccessStatusCode();
     var jsonResponse = await response.Content.ReadAsStringAsync();
-    var result = System.Text.Json.JsonSerializer.Deserialize<OllamaGenerateResponse>(jsonResponse);
+    var result = System.Text.Json.JsonSerializer.Deserialize<OllamaGenerateResponse>(jsonResponse, new JsonSerializerOptions
+    {
+      PropertyNameCaseInsensitive = true
+    });
     return result?.Response ?? "This is a generated response based on the provided prompt and context.";
   }
 }
