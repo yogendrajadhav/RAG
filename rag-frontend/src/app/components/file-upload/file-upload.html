@@ -1,1 +1,37 @@
-<p>file-upload works!</p>
+<div class="upload-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Upload PDF Document</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="upload-section">
+                <input type="file" accept=".pdf" (change)="onFileSelected($event)" #fileInput style="display: none" />
+                <button mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="uploading">
+                    <mat-icon>attach_file</mat-icon>
+                    Select PDF File
+                </button>
+                <div *ngIf="selectedFile" class="file-info">
+                    <mat-icon>description</mat-icon>
+                    <span>{{ selectedFile.name }} ({{ (selectedFile.size / 1024 /
+                        1024).toFixed(2) }} MB)</span>
+                </div>
+                <button mat-raised-button color="accent" (click)="onUpload()" [disabled]="!selectedFile || uploading"
+                    class="upload-btn">
+                    <mat-icon *ngIf="!uploading">cloud_upload</mat-icon>
+                    <mat-spinner *ngIf="uploading" diameter="20"></mat-spinner>
+                    {{ uploading ? 'Uploading...' : 'Upload & Process' }}
+                </button>
+            </div>
+            <mat-error *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </mat-error>
+            <div *ngIf="uploadResult && uploadResult.success" class="success-message">
+                <mat-icon>check_circle</mat-icon>
+                <div>
+                    <p>{{ uploadResult.message }}</p>
+                    <p>Processed {{ uploadResult.chunksProcessed }} text chunks</p>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
