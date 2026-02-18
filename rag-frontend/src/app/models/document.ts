@@ -5,7 +5,7 @@ export interface SourceDocument {
     score:string;
 }
 
-export interface Uploadresponse{
+export interface UploadResponse{
     success: boolean;
     message: string;
     documentId: string;
