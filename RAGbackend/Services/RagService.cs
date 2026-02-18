@@ -57,11 +57,9 @@ public class RagService : IRagService
     try
     {
       // Generate embedding for the question
-      var questionEmbedding = await
-        _llmService.GenerateEmbeddingAsync(question);
+      var questionEmbedding = await _llmService.GenerateEmbeddingAsync(question);
       // Search for relevant chunks
-      var relevantChunks = await _vectorStore.SearchAsync(questionEmbedding,
-        topK);
+      var relevantChunks = await _vectorStore.SearchAsync(questionEmbedding, topK);
       if (!relevantChunks.Any())
       {
         return new QueryResponse
@@ -71,8 +69,7 @@ public class RagService : IRagService
           ProcessingTimeMs = stopwatch.ElapsedMilliseconds
         };
       } // Build context from relevant chunks
-      var context = string.Join("\n\n", relevantChunks.Select(c =>
-        $"[Source: {c.FileName}, Page {c.PageNumber}]\n{c.Content}"));
+      var context = string.Join("\n\n", relevantChunks.Select(c => $"[Source: {c.FileName}, Page {c.PageNumber}]\n{c.Content}"));
       // Generate response using LLM
       var answer = await _llmService.GenerateResponseAsync(question, context);
       stopwatch.Stop();
