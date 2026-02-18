@@ -1,1 +1,69 @@
-<p>query-interface works!</p>
+<div class="query-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Ask Questions About Your Documents</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="query-section">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Your Question</mat-label>
+                    <textarea matInput [(ngModel)]="question" placeholder="What would you like to know?" rows="3"
+                        (keydown.enter)="$any($event).ctrlKey && onSubmitQuery()"></textarea>
+                    <mat-hint>Press Ctrl+Enter to submit</mat-hint>
+                </mat-form-field>
+                <div class="button-group">
+                    <button mat-raised-button color="primary" (click)="onSubmitQuery()"
+                        [disabled]="!question.trim() || querying">
+                        <mat-icon *ngIf="!querying">search</mat-icon>
+                        <mat-spinner *ngIf="querying" diameter="20"></mat-spinner>
+                        {{ querying ? 'Searching...' : 'Search' }}
+                    </button>
+                    <button mat-button (click)="clearQuery()" [disabled]="querying">
+                        Clear
+                    </button>
+                </div>
+            </div>
+            <mat-error *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </mat-error>
+            <div *ngIf="queryResponse" class="response-section">
+                <mat-card class="answer-card">
+                    <mat-card-header>
+                        <mat-card-title>Answer</mat-card-title>
+                        <mat-card-subtitle>
+                            Processed in {{ queryResponse?.processingTimeMs }}ms
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p class="answer-text">{{ queryResponse?.answer }}</p>
+                    </mat-card-content>
+                </mat-card>
+                <div *ngIf="queryResponse.sources.length > 0" class="sources-section">
+                    <h3>Sources</h3>
+                    <mat-accordion>
+                        <mat-expansion-panel *ngFor="let source of queryResponse.sources; let i =
+index">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon>description</mat-icon>
+                                    {{ source.fileName }} - Page {{ source.pageNumber }}
+                                </mat-panel-title>
+                                67/78</mat-expansion-panel-header>
+                            <p>{{ source.content }}</p>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <div *ngIf="queryHistory.length > 0" class="history-section">
+        <h2>Query History</h2>
+        <mat-list>
+            <mat-list-item *ngFor="let item of queryHistory">
+                <mat-icon matListItemIcon>history</mat-icon>
+                <div matListItemTitle>{{ item.question }}</div>
+                <div matListItemLine>{{ item.response.answer.substring(0, 100) }}...</div>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
