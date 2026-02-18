@@ -38,12 +38,16 @@ export class DocumentService {
       }));
       }
 
-  queryDocument(query: string, topK: number): Observable<QueryResponse> {
+  queryDocument(query: string, topK: number=5): Observable<QueryResponse> {
     const requestBody = {
       query: query,
       topK: topK,
     };
     return this.http.post<QueryResponse>(`${this.apiUrl}/query`, requestBody);   
+  }
+
+  deleteDocument(documentId: string): Observable<any> {
+    return this.http.delete<{ success: boolean; message: string }>(`${this.apiUrl}/${documentId}`);
   }
   }
 
