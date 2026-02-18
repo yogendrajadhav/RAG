@@ -1,0 +1,69 @@
+.query-container {
+padding: 20px;
+max-width: 900px;
+margin: 0 auto;
+}
+
+ .query-section {
+display: flex;
+flex-direction: column;
+gap: 15px;
+margin: 20px 0;
+} 
+
+.full-width {
+width: 100%;
+} 
+
+.button-group {
+display: flex;
+gap: 10px;
+} 
+
+.error-message {
+margin-top: 15px;
+padding: 10px;
+background-color: #ffebee;
+border-radius: 4px;
+color: #c62828;
+}
+
+.response-section {
+margin-top: 30px;
+}
+
+.answer-card {
+margin-bottom: 20px;
+background-color: #e3f2fd;
+} 
+
+.answer-text {
+font-size: 16px;
+line-height: 1.6;
+white-space: pre-wrap;
+} 
+
+.sources-section {
+margin-top: 20px;
+} 
+
+.sources-section h3 {
+margin-bottom: 15px;
+color: #424242;
+} 
+
+mat-expansion-panel {
+margin-bottom: 10px;
+} 
+
+.history-section {
+margin-top: 40px;
+} 
+
+.history-section h2 {
+margin-bottom: 15px;
+} 
+
+mat-spinner {
+display: inline-block;
+}
