@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { UploadResponse } from '../models/document';
+import { QueryResponse, UploadResponse } from '../models/document';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -38,12 +38,12 @@ export class DocumentService {
       }));
       }
 
-  queryDocument(query: string, topK: number): Observable<any> {
+  queryDocument(query: string, topK: number): Observable<QueryResponse> {
     const requestBody = {
       query: query,
       topK: topK,
     };
-    return this.http.post(`${this.apiUrl}/query`, requestBody);   
+    return this.http.post<QueryResponse>(`${this.apiUrl}/query`, requestBody);   
   }
   }
 
