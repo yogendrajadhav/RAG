@@ -25,7 +25,7 @@ public class PdfProcessingService : IPdfProcessingService
           continue;
         }
 
-        var pageChunks = CreateChunks(text, documentId, fileName, pageNumber);
+        var pageChunks = CreateChunks(text, documentId, fileName, pageNumber.ToString());
         chunks.AddRange(pageChunks);
       }
     }
@@ -33,7 +33,7 @@ public class PdfProcessingService : IPdfProcessingService
     return await Task.FromResult(chunks);
   }
 
-  private List<DocumentChunk> CreateChunks(string text, string documentId, string fileName, int pageNumber)
+  private List<DocumentChunk> CreateChunks(string text, string documentId, string fileName, string pageNumber)
   {
     var chunks = new List<DocumentChunk>();
     var words = text.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
@@ -49,7 +49,7 @@ public class PdfProcessingService : IPdfProcessingService
         FileName = fileName,
         Content = chunkText,
         PageNumber = pageNumber,
-        ChunkIndex = chunks.Count,
+        ChunkIndex = chunks.Count.ToString(),
         CreatedAt = DateTime.UtcNow
       });
     }
